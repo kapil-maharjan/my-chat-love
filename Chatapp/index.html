@@ -27,7 +27,7 @@
     const messages = document.getElementById('messages');
     const chatWindow = document.getElementById('chat-window');
 
-    // --- ส่วนที่เพิ่ม: โหลดข้อความเก่าจากเครื่องมาแสดงทันทีที่เปิดแอป ---
+    // 1. โหลดข้อความเก่าจาก LocalStorage มาแสดงทันทีที่เปิดแอป
     const savedMessages = JSON.parse(localStorage.getItem('my_chat_history')) || [];
     savedMessages.forEach(data => {
         addMessageToUI(data);
@@ -36,9 +36,17 @@
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         if (input.value && user.value) {
+            // สร้างข้อมูลเวลาปัจจุบัน
+            const now = new Date();
+            const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
+                               now.getMinutes().toString().padStart(2, '0');
+            const dateString = now.toLocaleDateString('th-TH', { day:'numeric', month:'short' });
+
             socket.emit('chat message', {
                 user: user.value,
-                msg: input.value
+                msg: input.value,
+                time: timeString,
+                date: dateString
             });
             input.value = '';
         }
@@ -47,16 +55,23 @@
     socket.on('chat message', (data) => {
         addMessageToUI(data);
 
-        // --- ส่วนที่เพิ่ม: เซฟข้อความใหม่ลงเครื่อง ---
+        // 2. เซฟข้อความใหม่ลงเครื่อง (LocalStorage)
         savedMessages.push(data);
-        if (savedMessages.length > 100) savedMessages.shift(); // เก็บไว้แค่ 100 ข้อความล่าสุด
+        if (savedMessages.length > 100) savedMessages.shift(); 
         localStorage.setItem('my_chat_history', JSON.stringify(savedMessages));
     });
 
-    // ฟังก์ชันช่วยแสดงผลข้อความ
+    // 3. ฟังก์ชันแสดงผลข้อความ (พร้อมชื่อ, ข้อความ, และเวลา)
     function addMessageToUI(data) {
         const item = document.createElement('li');
-        item.innerHTML = `<span class="username">${data.user}</span> ${data.msg}`;
+        // ตรวจสอบว่ามีข้อมูลเวลาไหม (เผื่อข้อความเก่าที่ยังไม่มีเวลา)
+        const displayTime = data.time ? `${data.date} | ${data.time}` : "";
+        
+        item.innerHTML = `
+            <span class="username" style="display: block; font-weight: bold; color: #007bff; font-size: 0.8em;">${data.user}</span> 
+            <span class="text">${data.msg}</span>
+            <small style="display: block; font-size: 0.7em; color: #999; margin-top: 4px;">${displayTime}</small>
+        `;
         messages.appendChild(item);
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }
