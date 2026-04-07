@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>My Real-Time Chat</title>
+</head>
+<body>
+    <h2>ห้องแชทสุดล้ำ 🚀</h2>
+    <div id="chat-window">
+        <ul id="messages"></ul>
+    </div>
+
+    <form id="form">
+        <input id="user" placeholder="ชื่อของคุณ..." required style="flex: 0.3;">
+        <input id="input" placeholder="พิมพ์ข้อความ..." autocomplete="off" required>
+        <button>ส่ง</button>
+    </form>
+    
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io(); // เชื่อมต่อกับ Server ที่รันอยู่พอร์ต 3000
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const user = document.getElementById('user');
+    const messages = document.getElementById('messages');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value && user.value) {
+            // ส่งข้อมูลไปหา Server
+            socket.emit('chat message', {
+                user: user.value,
+                msg: input.value
+            });
+            input.value = ''; // เคลียร์ช่องพิมพ์
+        }
+    });
+
+    // รอรับข้อมูลจาก Server แล้วเอามาสร้างเป็น <li> ในหน้าเว็บ
+    socket.on('chat message', (data) => {
+        const item = document.createElement('li');
+        item.innerHTML = `<b>${data.user}:</b> ${data.msg}`;
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+</script>
+
+</body>
+</html>

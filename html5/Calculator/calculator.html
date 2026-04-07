@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="/html5/Calculator/styleCalculator.css" / >
+</head>
+<body>
+  <div class="changeAll">
+    <div id="displayContent" clas="changeAll"></div> <button class="myStyle" onclick="clearAll()">Clear</button>
+    <div class="changeAll">
+      <button onclick="updateCalculation('1')">1</button>
+      <button onclick="updateCalculation('2')">2</button>
+      <button onclick="updateCalculation('3')">3</button>
+      <button onclick="updateCalculation(' + ')">+</button>
+      
+    </div>
+    
+    <div class="changeAll">
+        <button onclick="updateCalculation('4')">4</button>
+        <button onclick="updateCalculation('5')">5</button>
+        <button onclick="updateCalculation('6')">6</button>
+        <button onclick="updateCalculation(' - ')">-</button>
+        
+    </div>
+
+    <div class="changeAll">
+        <button onclick="updateCalculation('7')">7</button>
+        <button onclick="updateCalculation('8')">8</button>
+        <button onclick="updateCalculation('9')">9</button>
+        <button onclick="updateCalculation(' / ')">/</button>
+        
+    </div>
+
+    <div class="changeAll">
+        <button onclick="updateCalculation('0')">0</button>
+        <button onclick="updateCalculation('.')">.</button>
+        <button onclick="displayValue()">=</button>
+        <button onclick="updateCalculation(' * ')">*</button>
+        
+    </div>
+  </div>
+     
+    <script>
+        let calculation = "";
+        let displayContent = document.getElementById("displayContent");
+        
+        function updateCalculation(value) {
+            displayContent.innerHTML = calculation += value;
+            
+        }
+
+        function displayValue() {
+            displayContent.innerHTML = calculation = eval(calculation)
+
+            
+        }
+
+        function clearAll() {
+            displayContent.innerHTML = '';
+            calculation = '';
+        }
+    </script>
+</body>
+</html>

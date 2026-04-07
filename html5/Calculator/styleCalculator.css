@@ -1,0 +1,22 @@
+.changeAll {
+    display: block;
+    width: 100%;
+    margin: 15px;
+    padding: 5px;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+   
+}
+
+#displayContent {
+    display: inline;
+    color: blue;
+}
+
+.myStyle {
+    color: blue;
+    cursor: pointer;
+
+}

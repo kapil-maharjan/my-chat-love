@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin-flip game</title>
+
+    <p>My guess</p>
+    <button onclick="guessHead()">Head</button>
+    <button onclick="guessTail()">Tail</button>
+</head>
+<body>
+    <script>
+        
+
+    function guessHead() {
+
+        let randomNum = Math.random();
+        let result = '';
+        let guess = '';
+
+        // if (randomNum < 0.5) {
+        //     result = 'Head';
+        // } else {
+        //     result = 'Tail';
+        // }
+
+        randomNum < 0.5 ? result = 'Head' : result = 'Tail';
+
+        // if (result === 'Head') {
+        //     guess = 'You win!';
+        // } else {
+        //     guess = 'You lose!';
+        // }
+
+        result === 'Head' ? guess = 'You win!' : guess = 'You lose!';
+    
+        alert(`You guess Head. Output is ${result}. ${guess}`);
+
+    }
+
+    function guessTail() {
+
+        let randomNum = Math.random();
+        let result = '';
+        let guess = '';
+
+        // if (randomNum < 0.5) {
+        //     result = 'Head';
+        // } else {
+        //     result = 'Tail';
+        // }
+
+        randomNum < 0.5 ? result = 'Head' : result = 'Tail';
+
+        // if (result === 'Head') {
+        //     guess = 'You lose!';
+        // } else {
+        //     guess = 'You win!';
+        // }
+
+        result === 'Head' ? guess = 'You lose!' : guess = 'You win!';
+        alert(`You guess Tail. Output is ${result}. ${guess}`);
+    }
+    </script>
+    
+</body>
+</html>

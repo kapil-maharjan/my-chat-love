@@ -1,0 +1,64 @@
+.img-container {
+  display: flex;
+  align-items: right;
+  float: right; 
+  gap: 20px;
+}
+
+.image {
+  
+  width: 100px; 
+  height: auto;
+}
+
+address {
+  width: 70%; /* Adjust width as needed, ensuring total is around 100% */
+}
+
+#eduHeader {
+  cursor: pointer;
+}
+
+#showMoreEdu {
+   cursor: pointer; 
+   color: blue; 
+   font-weight: bold; 
+   margin-top: 10px;
+}
+
+#eduHeader:hover {
+    color: blue;
+    transition: 0.3s;
+}
+
+#showMoreWork {
+   cursor: pointer; 
+   color: blue; 
+   font-weight: bold; 
+   margin-top: 10px;
+}
+
+.hidden-work, .hidden-edu {
+    display: none; /* ซ่อนงานเก่าๆ ไว้ก่อน */
+}
+
+/* ตกแต่งปุ่มนิดหน่อย */
+#showMoreWork:hover, #showMoreEdu:hover {
+    text-decoration: underline;
+    color: darkblue;
+}
+
+
+table, td  {
+    border: 2px solid rgb(60, 60, 194);
+    border-radius: 5px;
+}
+
+table {
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+u {
+    color: rgba(12, 12, 234, 0.847);
+}
